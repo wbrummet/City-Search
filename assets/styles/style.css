@@ -1,0 +1,112 @@
+html,body {
+	height:100%;
+}
+
+.container {
+	min-height: 100%;
+}
+
+div#top-layer {
+	background-image: url("../img/vertical-waves.png");
+	background-repeat: repeat;
+	min-height: 100%;
+}
+
+tr:nth-child(2n+1) {
+	background-color: rgba(200,200,200, 10);
+}
+
+.noUi-connect {
+	background: grey;
+}
+
+.city-label:hover, .state-label:hover, .population-label:hover {
+	cursor:pointer;
+}
+
+#top-row {
+	min-height: 50px;
+	max-height: 100px;
+	color: black;
+	background-image: url("../img/organic-tiles.png");
+}
+
+#city-name-col {
+	margin-top: 10px;
+}
+
+#search-term {
+	width: 130px;
+}
+
+#state-col {
+	margin-top: -5px;
+}
+
+#state-col span {
+	font-size: 13px;
+}
+
+#states {
+	min-height: 10px;
+	max-height: 80px;
+	height: auto;
+	width: 130px;
+}
+
+#min-pop-col {
+	margin-top: 10px;
+}
+
+#min-pop-col span{
+	font-size: 14px;
+}
+
+#min-pop {
+	width: 130px;
+}
+
+#max-pop-col {
+	float: right;
+	margin-top: 10px;
+}
+
+.wrapper span, .wrapper input {
+	float: right;
+}
+
+#max-pop-col span{
+	font-size: 14px;
+}
+
+#max-pop {
+	width: 130px;
+}
+
+td.city-text {
+	padding-left: 20px;
+}
+
+td.pop {
+	padding-right: 20px;
+	float: right;
+}
+
+.empty {
+	min-height: 20px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+tr {
+	border: none;
+}
+
+td, th {
+  border-right: solid 1px #000;
+  border-left: solid 1px #000;
+  border-bottom: solid 1px #000;
+  border-top: solid 1px #000;
+}

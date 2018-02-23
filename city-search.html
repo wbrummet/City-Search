@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>City Search</title>
+</head>
+<header>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="assets/styles/nouislider.min.css">
+	<link rel="stylesheet" href="assets/styles/style.css">
+</header>
+<body>
+	<div id="top-layer">
+
+		<div class="container">
+			<div class="row empty"></div>
+		</div>
+
+		<!--
+		Placing the non-standard double input range slider outside of the Vue component
+		so that Vue does not try to control it. The slider would not function within Vue.
+		-->
+		<div class="container">
+			<div class="row">
+				<div class="col-6"></div>
+				<div class="col-6 slider-div">
+					<!-- noUiSlider target -->
+					<div id="slider">
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="app" class="container">
+			<div id="top-row" class="row">
+
+				<!-- Search field -->
+				<div class="col-3">
+					<div id="city-name-col">
+						<span>Enter a city name</span>
+						<input type="text" id="search-term" v-model="search_term">
+					</div>
+				</div>
+
+				<!-- State multiple-select -->
+				<div class="col-3">
+					<div id="state-col">
+						<span>Pick state(s) to search in</span>
+						<select v-model="states_to_search" id="states" multiple>
+							<option>Loading...</option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Minimum population number input -->
+				<div class="col-3" id="min-pop-col">
+					  <span>Minimum population</span>
+					  <input v-model="min_pop" type="number" id="min-pop" min="0" max="1000000" value="100000">
+				</div>
+
+				<!-- Maximum population number input -->
+				<div class="col-3" id="max-pop-col">
+					<div class="wrapper">
+						<span>Maximum population</span>
+						<input v-model="max_pop" type="number" id="max-pop" min="0" max="1000000" value="1000000">
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="container">
+					<div class="row">
+						<table class="col-12">
+							<thead>
+								<tr class="row">
+
+									<!-- City name header / City name sort toggle -->
+									<th class="col-4 city-label" v-on:click="sort_func('city_name')">
+										City Name
+										<span v-if="sort_method=='city_name' && sort_order==='asc'">&#9650;</span>
+										<span v-else-if="sort_method=='city_name' && sort_order==='desc'">&#9660;</span>
+									</th>
+
+									<!-- State header / State sort toggle -->
+									<th class="col-4 state-label" v-on:click="sort_func('state')">
+										State
+										<span v-if="sort_method=='state' && sort_order==='asc'">&#9650;</span>
+										<span v-else-if="sort_method=='state' && sort_order==='desc'">&#9660;</span>
+									</th>
+
+									<!-- Population header / Population sort toggle -->
+									<th class="col-4 population-label text-right" v-on:click="sort_func('population')">
+										Population
+										<span v-if="sort_method=='population' && sort_order==='asc'">&#9650;</span>
+										<span v-else-if="sort_method=='population' && sort_order==='desc'">&#9660;</span>
+									</th>
+
+								</tr>
+							</thead>
+
+							<!-- Table row for each city datum -->
+							<template v-for="city in filtered_data">
+								<tr class="row top-row">
+									<td class="col-4 city-text">{{city[0]}}</td>
+									<td class="col-4 state-text">{{city[1]}}</td>
+									<td class="col-4 pop text-right">{{city[2]}}</td>
+								</tr>
+							</template>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Vue, jQuery, Bootstrap 4, and Lodash -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+
+	<!-- A 3rd party double input range slider -->
+	<!-- vendor url: https://refreshless.com/nouislider/ -->
+	<script type="text/javascript" src="assets/scripts/nouislider.min.js"></script>
+
+	<!-- Custom Scripts -->
+	<!-- Initializes and sets slide event handler for noUiSlider -->
+	<script type="text/javascript" src="assets/scripts/slider.js"></script>
+
+	<!-- Definitions for the methods used with the Vue component -->
+	<script type="text/javascript" src="assets/scripts/component-methods.js"></script>
+
+	<!-- Parsing of API response and initialization of the Vue component -->
+	<script type="text/javascript" src="assets/scripts/init-component.js"></script>
+
+	<!-- Makes the call to the census.gov API -->
+	<script type="text/javascript" src="assets/scripts/ajax.js"></script>
+</body>
+</html>
